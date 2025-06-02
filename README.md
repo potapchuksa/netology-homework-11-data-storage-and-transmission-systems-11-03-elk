@@ -174,6 +174,8 @@ curl -X GET 'localhost:9200/_cluster/health?pretty'
 
 ### Решение
 
+Отправим в Elastic логи авторизации с хостовой ВМ.
+
 1. Изменил [docker-compose.yaml](task-5/docker-compose.yaml)
 
 ![](img/img-05-01.png)
