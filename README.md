@@ -40,6 +40,46 @@
 
 ### Решение
 
+1. Создал [docker-compose.yaml](task-1/docker-compose.yaml) (проброс конфигурационного файла пока закомментировал)
+
+![](img/img-01-01.png)
+
+2. Запустил.
+
+3. Скопировал конфигурационный файл из контейнера на хост.
+
+4. Прочитал статус кластера.
+
+5. Остановил.
+
+```
+docker compose up -d
+docker cp elk-elasticsearch-1:/usr/share/elasticsearch/config/elasticsearch.yml ./elasticsearch.yml
+curl -X GET 'localhost:9200/_cluster/health?pretty'
+docker compose down
+```
+
+![](img/img-01-02.png)
+
+6. Раскомментировал проброс конфиграционного файла.
+
+![](img/img-01-03.png)
+
+7. Закоментировал строку устанавливающую имя кластера.
+
+![](img/img-01-04.png)
+
+8. Запустил.
+
+9. Прочитал статус кластера.
+
+```
+docker compose up -d
+curl -X GET 'localhost:9200/_cluster/health?pretty'
+```
+
+![](img/img-01-05.png)
+
 ---
 
 ### Задание 2. Kibana
@@ -49,6 +89,18 @@
 *Приведите скриншот интерфейса Kibana на странице http://<ip вашего сервера>:5601/app/dev_tools#/console, где будет выполнен запрос GET /_cluster/health?pretty*.
 
 ### Решение
+
+1. Изменил [docker-compose.yaml](task-2/docker-compose.yaml)
+
+![](img/img-02-01.png)
+
+2. Изменил имя кластера в файле elasticsearch.yml
+
+![](img/img-02-02.png)
+
+3. Прочитал статус кластера в web-интерфейсе
+
+![](img/img-02-03.png)
 
 ---
 
@@ -60,6 +112,28 @@
 
 ### Решение
 
+1. Изменил [docker-compose.yaml](task-3/docker-compose.yaml)
+
+![](img/img-03-01.png)
+
+2. Создал [logstash.conf](task-3/logstash.conf)
+
+![](img/img-03-02.png)
+
+3. Запустил
+
+![](img/img-03-03.png)
+
+![](img/img-03-03-1.png)
+
+4. Проверил
+
+![](img/img-03-04.png)
+
+### Важно
+
+При пробросе только файла access.log Logstash не считывал вновь поступающие данные. Решение - пробросить всю папку с логами.
+
 ---
 
 ### Задание 4. Filebeat. 
@@ -70,6 +144,22 @@
 
 ### Решение
 
+1. Изменил [docker-compose.yaml](task-4/docker-compose.yaml)
+
+![](img/img-04-01.png)
+
+2. Создал [filebeat.yml](task-4)
+
+![](img/img-04-02.png)
+
+3. Изменил [logstash.conf](task-4/logstash.conf)
+
+![](img/img-04-03.png)
+
+4. Запустил и проверил
+
+![](img/img-04-04.png)
+
 ---
 
 ## Дополнительные задания (со звёздочкой*)
@@ -77,9 +167,27 @@
 
 ### Задание 5*. Доставка данных 
 
-### Решение
-
 Настройте поставку лога в Elasticsearch через Logstash и Filebeat любого другого сервиса , но не Nginx. 
 Для этого лог должен писаться на файловую систему, Logstash должен корректно его распарсить и разложить на поля. 
 
 *Приведите скриншот интерфейса Kibana, на котором будет виден этот лог и напишите лог какого приложения отправляется.*
+
+### Решение
+
+1. Изменил [docker-compose.yaml](task-5/docker-compose.yaml)
+
+![](img/img-05-01.png)
+
+2. Создал [filebeat.yml](task-5)
+
+![](img/img-05-02.png)
+
+3. Изменил [logstash.conf](task-5/logstash.conf)
+
+![](img/img-05-03.png)
+
+4. Запустил и проверил (пришлось дать права на чтение auth.log для всех)
+
+![](img/img-05-04.png)
+
+

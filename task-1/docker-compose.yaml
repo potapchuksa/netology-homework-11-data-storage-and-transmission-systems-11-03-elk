@@ -1,0 +1,13 @@
+services:
+  elasticsearch:
+    image: elasticsearch:8.12.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.ml.enabled=false  # Отключаю ML, он не запускаетсявероятнее всего из-за древности процессоров
+      - ES_JAVA_OPTS=-Xms2g -Xmx2g
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml  # монтирование конфига
+      - ./es_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
