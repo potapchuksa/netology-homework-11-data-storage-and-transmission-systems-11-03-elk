@@ -148,7 +148,7 @@ curl -X GET 'localhost:9200/_cluster/health?pretty'
 
 ![](img/img-04-01.png)
 
-2. Создал [filebeat.yml](task-4)
+2. Создал [filebeat.yml](task-4/filebeat.yml)
 
 ![](img/img-04-02.png)
 
@@ -178,7 +178,7 @@ curl -X GET 'localhost:9200/_cluster/health?pretty'
 
 ![](img/img-05-01.png)
 
-2. Создал [filebeat.yml](task-5)
+2. Создал [filebeat.yml](task-5/filebeat.yml)
 
 ![](img/img-05-02.png)
 
